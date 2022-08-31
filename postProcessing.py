@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-import open3d as o3d
 import numpy as np
 
 def cartesian2Polar(x,y):
@@ -41,7 +40,24 @@ for z in range(len(data)):
                 aux+=1
 
 file.close()
-print("Loading a point cloud")
-pcd = o3d.io.read_point_cloud('data.xyzrgb',format='xyzrgb')
-print(pcd)
-o3d.visualization.draw_geometries([pcd])
+
+file=open('data.xyz','w+')
+
+aux=0
+for z in range(len(data)):
+    for y in range(len(data[z])):
+        for x in range(len(data[z][y])-400):
+            #if data[z][y][x]>235 and  data[z][y][x]<240:
+            if data[z][y][x]/255>0.98:
+                #a=np.max(data[z][y])
+                #x=np.median(a)
+                rho,theta=cartesian2Polar(int(x)*factorCorretion,int(y)*0.9)
+                f[aux][0]=rho
+                f[aux][1]=theta
+                f[aux][2]=int(z)*20
+                content=str(f[aux][0])+' '+str(f[aux][1])+' '+str(f[aux][2])
+                file.write(content)
+                file.write('\n')
+                aux+=1
+
+file.close()
