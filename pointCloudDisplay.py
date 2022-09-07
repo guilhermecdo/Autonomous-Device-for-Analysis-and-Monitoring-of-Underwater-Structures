@@ -1,12 +1,26 @@
 #!/usr/bin/python3
 
 import open3d as o3d
+import numpy as np
+import matplotlib.pyplot as plt
 
 print("Loading a point cloud")
 pcd = o3d.io.read_point_cloud('data.xyz',format='xyz')
 print(pcd)
 #o3d.visualization.draw_geometries([pcd])
 
-downpcd = pcd.voxel_down_sample(voxel_size=25)
-print(downpcd)
-o3d.visualization.draw_geometries([downpcd])
+pcd = pcd.voxel_down_sample(voxel_size=5)
+print(pcd)
+#o3d.visualization.draw_geometries([pcd])
+
+with o3d.utility.VerbosityContextManager(
+        o3d.utility.VerbosityLevel.Debug) as mm:
+    labels = np.array(
+        pcd.cluster_dbscan(eps=100, min_points=5, print_progress=True))
+
+max_label = labels.max()
+print(f"point cloud has {max_label + 1} clusters")
+colors = plt.get_cmap("tab20")(labels / (max_label if max_label > 0 else 1))
+colors[labels < 0] = 0
+pcd.colors = o3d.utility.Vector3dVector(colors[:, :3])
+o3d.visualization.draw_geometries([pcd])
