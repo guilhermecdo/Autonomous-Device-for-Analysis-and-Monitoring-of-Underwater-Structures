@@ -5,13 +5,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 print("Loading a point cloud")
-pcd = o3d.io.read_point_cloud('data.xyz',format='xyz')
+pcd = o3d.io.read_point_cloud('dataNoFilter.xyz',format='xyz')
+print('No filtering pcd')
 print(pcd)
-#o3d.visualization.draw_geometries([pcd])
+o3d.visualization.draw_geometries([pcd])
+
+pcd = o3d.io.read_point_cloud('dataFilter.xyz',format='xyz')
+print('Filtering pcd')
+print(pcd)
+o3d.visualization.draw_geometries([pcd])
 
 pcd = pcd.voxel_down_sample(voxel_size=5)
+print('Voxel filtering pcd')
 print(pcd)
-#o3d.visualization.draw_geometries([pcd])
+o3d.visualization.draw_geometries([pcd])
 
 with o3d.utility.VerbosityContextManager(
         o3d.utility.VerbosityLevel.Debug) as mm:
