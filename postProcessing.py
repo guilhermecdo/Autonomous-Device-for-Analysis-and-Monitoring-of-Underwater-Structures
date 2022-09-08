@@ -16,32 +16,27 @@ factorCorretion=rangeSonar/numOfpoints
 lines=(data.shape[0]*data.shape[1]*data.shape[2])
 
 f=np.zeros((lines,6))
+
  
-file=open('data.xyzrgb','w+')
+file=open('dataNoFilter.xyz','w+')
 
 aux=0
 for z in range(len(data)):
     for y in range(len(data[z])):
-        for x in range(len(data[z][y])):
-            #if data[z][y][x]>235 and  data[z][y][x]<240:
-            if data[z][y][x]/255>0.98:
-                #a=np.max(data[z][y])
-                #x=np.median(a)
+        for x in range(len(data[z][y])-400):
+            if data[z][y][x]:
                 rho,theta=cartesian2Polar(int(x)*factorCorretion,int(y)*0.9)
                 f[aux][0]=rho
                 f[aux][1]=theta
                 f[aux][2]=int(z)*20
-                f[aux][3]=0.0
-                f[aux][4]=float("{:.2f}".format(data[z][y][x]/254))
-                f[aux][5]=0.0
-                content=str(f[aux][0])+' '+str(f[aux][1])+' '+str(f[aux][2])+' '+str(f[aux][3])+' '+str(f[aux][4])+' '+str(f[aux][5])
+                content=str(f[aux][0])+' '+str(f[aux][1])+' '+str(f[aux][2])
                 file.write(content)
                 file.write('\n')
                 aux+=1
 
 file.close()
 
-file=open('data.xyz','w+')
+file=open('dataFilter.xyz','w+')
 
 aux=0
 for z in range(len(data)):
