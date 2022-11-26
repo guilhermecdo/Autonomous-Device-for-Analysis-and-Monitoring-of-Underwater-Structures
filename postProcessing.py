@@ -23,7 +23,7 @@ file=open('dataNoFilter.xyz','w+')
 aux=0
 for z in range(len(data)):
     for y in range(len(data[z])):
-        for x in range(len(data[z][y])-400):
+        for x in range(len(data[z][y])-400):#this 400 is a manual distance parameter change for 
             if data[z][y][x]:
                 rho,theta=cartesian2Polar(int(x)*factorCorretion,int(y)*0.9)
                 f[aux][0]=rho
@@ -42,10 +42,7 @@ aux=0
 for z in range(len(data)):
     for y in range(len(data[z])):
         for x in range(len(data[z][y])-400):
-            #if data[z][y][x]>235 and  data[z][y][x]<240:
             if data[z][y][x]/255>0.98:
-                #a=np.max(data[z][y])
-                #x=np.median(a)
                 rho,theta=cartesian2Polar(int(x)*factorCorretion,int(y)*0.9)
                 f[aux][0]=rho
                 f[aux][1]=theta
@@ -63,10 +60,7 @@ aux=0
 for z in range(len(data)):
     for y in range(len(data[z])):
         for x in range(len(data[z][y])):
-            #if data[z][y][x]>235 and  data[z][y][x]<240:
             if data[z][y][x]/255==1:
-                #a=np.max(data[z][y])
-                #x=np.median(a)
                 rho,theta=cartesian2Polar(int(x)*factorCorretion,int(y)*0.9)
                 f[aux][0]=rho
                 f[aux][1]=theta
