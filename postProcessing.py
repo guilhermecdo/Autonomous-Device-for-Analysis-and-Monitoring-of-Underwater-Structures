@@ -7,9 +7,9 @@ def cartesian2Polar(x,y):
     theta=np.arctan2(y,x)
     return (float("{:.2f}".format(rho)), float("{:.2f}".format(theta*180)))
 
-data=np.load('datasPiscina/matrixSample.npy')
+data=np.load('testPoolPipe/matrixSample.npy')
 
-rangeSonar=1500 #1.5m
+rangeSonar=3000 #1.5m
 numOfpoints=len(data[0][0])
 factorCorretion=rangeSonar/numOfpoints
 
