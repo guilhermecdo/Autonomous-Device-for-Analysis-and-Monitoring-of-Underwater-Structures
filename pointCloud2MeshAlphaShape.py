@@ -15,7 +15,7 @@ with o3d.utility.VerbosityContextManager(
     labels = np.array(
         pcd.cluster_dbscan(eps=100, min_points=5, print_progress=True))
 
-alpha = 25
+alpha = 40
 print(f"alpha={alpha:.3f}")
 mesh = o3d.geometry.TriangleMesh.create_from_point_cloud_alpha_shape(pcd, alpha)
 mesh.compute_vertex_normals()

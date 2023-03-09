@@ -30,4 +30,6 @@ print(f"point cloud has {max_label + 1} clusters")
 colors = plt.get_cmap("tab20")(labels / (max_label if max_label > 0 else 1))
 colors[labels < 0] = 0
 pcd.colors = o3d.utility.Vector3dVector(colors[:, :3])
+print('CLUSTER')
+print(pcd)
 o3d.visualization.draw_geometries([pcd])

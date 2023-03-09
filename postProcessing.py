@@ -14,6 +14,8 @@ numOfpoints=len(data[0][0])
 factorCorretion=rangeSonar/numOfpoints
 
 lines=(data.shape[0]*data.shape[1]*data.shape[2])
+print("numero de pontos")
+print(data.shape[0]*data.shape[1]*data.shape[2])
 
 f=np.zeros((lines,6))
 
@@ -23,7 +25,7 @@ file=open('dataNoFilter.xyz','w+')
 aux=0
 for z in range(len(data)):
     for y in range(len(data[z])):
-        for x in range(len(data[z][y])-400):#this 400 is a manual distance parameter change for 
+        for x in range(len(data[z][y])-550):#this 400 is a manual distance parameter change for 280,400,550
             if data[z][y][x]:
                 rho,theta=cartesian2Polar(int(x)*factorCorretion,int(y)*0.9)
                 f[aux][0]=rho
@@ -41,7 +43,7 @@ file=open('dataFilter.xyz','w+')
 aux=0
 for z in range(len(data)):
     for y in range(len(data[z])):
-        for x in range(len(data[z][y])-400):
+        for x in range(len(data[z][y])-550):
             if data[z][y][x]/255>0.98:
                 rho,theta=cartesian2Polar(int(x)*factorCorretion,int(y)*0.9)
                 f[aux][0]=rho

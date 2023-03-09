@@ -13,6 +13,6 @@ print(pcd)
 with o3d.utility.VerbosityContextManager(
         o3d.utility.VerbosityLevel.Debug) as cm:
     mesh, densities = o3d.geometry.TriangleMesh.create_from_point_cloud_poisson(
-        pcd, depth=15)
+        pcd, depth=5)
 print(mesh)
 o3d.visualization.draw_geometries([mesh])
