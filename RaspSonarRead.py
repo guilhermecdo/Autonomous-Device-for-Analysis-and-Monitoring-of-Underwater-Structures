@@ -20,6 +20,7 @@ def adjust_transmit_duration():
 
 def radioRead():
     messageEnd=False
+    messageStr=''
     while not messageEnd:
         bufferDecoded=[]
         buf=s.read(1)
